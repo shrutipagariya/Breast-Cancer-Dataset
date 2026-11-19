@@ -1,0 +1,73 @@
+schema: '2.0'
+stages:
+  collect:
+    cmd: python src/pipeline/collect.py
+    deps:
+    - path: src/pipeline/collect.py
+      hash: md5
+      md5: 8717e7d72a59b84cd3921a85ff8fea84
+      size: 930
+    outs:
+    - path: data/raw/breast_cancer.csv
+      hash: md5
+      md5: 24d9881fad8cfb3d94f5276d372e422b
+      size: 121955
+  preprocess:
+    cmd: python src/pipeline/preprocess.py
+    deps:
+    - path: data/raw/breast_cancer.csv
+      hash: md5
+      md5: 24d9881fad8cfb3d94f5276d372e422b
+      size: 121955
+    - path: src/pipeline/preprocess.py
+      hash: md5
+      md5: 6e108406e0fd7f657087beb5f26f34da
+      size: 2125
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 09c77617d3066019449ff741c1c8d586
+      size: 68434
+    - path: data/processed/train.csv
+      hash: md5
+      md5: ab52c1e2ad67ae8ee5f456b5897211f1
+      size: 271459
+  features:
+    cmd: python src/pipeline/features.py
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 09c77617d3066019449ff741c1c8d586
+      size: 68434
+    - path: data/processed/train.csv
+      hash: md5
+      md5: ab52c1e2ad67ae8ee5f456b5897211f1
+      size: 271459
+    - path: src/pipeline/features.py
+      hash: md5
+      md5: 64e8e5c7d707aaf98805c121d1ef2251
+      size: 1362
+    outs:
+    - path: data/features/test_features.csv
+      hash: md5
+      md5: 9f63c3da1478720ba910e2552bea6f23
+      size: 71686
+    - path: data/features/train_features.csv
+      hash: md5
+      md5: 3fe21a11d6debb94944ce437b066f0eb
+      size: 284589
+  validate:
+    cmd: python src/pipeline/validate.py
+    deps:
+    - path: data/features/test_features.csv
+      hash: md5
+      md5: 9f63c3da1478720ba910e2552bea6f23
+      size: 71686
+    - path: data/features/train_features.csv
+      hash: md5
+      md5: 3fe21a11d6debb94944ce437b066f0eb
+      size: 284589
+    - path: src/pipeline/validate.py
+      hash: md5
+      md5: 9c6466c250c5a3dadad77d122930002b
+      size: 1906

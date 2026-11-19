@@ -1,0 +1,27 @@
+
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# MLflow tracking files
+mlruns/
+mlflow.db
+
+# DVC cache and local storage
+.dvc/cache/
+DVC_Remote_Breast_Cancer/
+
+# IDE settings
+.vscode/
+
+# Temporary files
+*.log
+*.tmp
